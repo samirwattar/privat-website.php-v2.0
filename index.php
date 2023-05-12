@@ -1,5 +1,6 @@
+<!--inkluderar filen server.php i php skriptet-->
 <?php
-    session_start();
+    include('server.php')
 ?>
 
 <!DOCTYPE html>
@@ -26,29 +27,30 @@
             <a href="#">shutup</a>
             <button class="button-login">Login</button>
         </nav>
-    </header>
+    </header>    
+    </div>
     <div class="box">
 
         <span class="icon-close"><ion-icon name="close"></ion-icon></span>
 
         <div class="card-box login">
             <h1>Login</h1>
-            <form action="">
+            <form action="server.php" method="POST">
                 <div class="input-style">
                     <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                    <input type="email" name="" id="" required>
+                    <input type="email" name="email" id="email" value="<?php echo $email; ?>" required>
                     <label for="Email">Email</label>
                 </div>
                 <div class="input-style">
                     <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                    <input type="password" name="" id="" required>
+                    <input type="password" name="password" id="password" required>
                     <label for="password">Password</label>
                 </div>
                 <div class="remember">
                     <label><input type="checkbox" name="" id="">Remember me</label>
                     <a href="#">Forgot password?</a>
                 </div>
-                <button type="submit" methotd="POST" class="btn">Login</button>
+                <button type="submit" name="login" method="POST" class="btn">Login</button>
                 <div  class="login-register">
                     <p>Dont have an account? <a href="#" id="registerLink"  class="register-link">Register</a></p>
                 </div>
@@ -57,20 +59,20 @@
 
             <div class="card-box register">
                 <h1>Register</h1>
-                <form action="include/signup.php" method="POST">
+                <form action="server.php" method="POST">
                     <div class="input-style">
                         <span class="icon"><ion-icon name="person"></ion-icon></span>
-                        <input type="text" name="user" id="user" required>
+                        <input type="text" name="username" id="username" value="<?php echo $username; ?>" required >
                         <label for="Username">Username</label>
                     </div>
                     <div class="input-style">
                         <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                        <input type="email" name="email" id="email" required>
+                        <input type="email" name="email" id="email" value="<?php echo $email; ?>" required>
                         <label for="Email">Email</label>
                     </div>
                     <div class="input-style">
                         <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                        <input type="password" name="pass" id="pass" required>
+                        <input type="password" name="password" id="password" required>
                         <label for="password">Password</label>
                     </div>
                     <div class="remember">
