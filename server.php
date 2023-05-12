@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// initialiserar variabler
+//initialiserar variabler
 $username = "";
 $email = "";
 $errors = array(); 
@@ -54,29 +54,41 @@ if (isset($_POST['submit'])) {
 
 
 
-
-//den fungerar inte ännu men är fortfarande under utveckling 
+// Kontrollera om login formuläret har skickats
 if (isset($_POST['login'])) {
-  $email = mysqli_real_escape_string($db, $_POST['email']);
-  $password = mysqli_real_escape_string($db, $_POST['password']);
-
-  if (empty($email)) {
-  	array_push($errors, "email is required");
+//Hämta e-postadressen från formuläret och filtrera den mot sql injektioner
+  $email = mysqli_real_escape_string($db, $_POST['email']); 
+  //Hämta lösenordet från formuläret och filtrera det mot sql injektioner
+  $password = mysqli_real_escape_string($db, $_POST['password']); 
+//Kontrollera om e-postadressen är tom
+  if (empty($email)) { 
+    //Lägg till ett felmeddelande till $errors arrayen
+  	array_push($errors, "email is required"); 
   }
-  if (empty($password)) {
-  	array_push($errors, "Password is required");
+  //Kontrollera om lösenordet är tomt
+  if (empty($password)) { 
+  //Lägg till ett felmeddelande till $errors-arrayen
+  	array_push($errors, "Password is required"); 
   }
 
-  if (count($errors) == 0) {
-  	$password = md5($password);
-  	$query = "SELECT * FROM users WHERE email='$email' AND pass='$password'";
-  	$results = mysqli_query($db, $query);
-  	if (mysqli_num_rows($results) == 1) {
-  	  $_SESSION['email'] = $email;
-  	  $_SESSION['success'] = "You are now logged in";
-  	  header('location: random.php');
+  //Kontrollera om det finns några felmeddelanden
+  if (count($errors) == 0) { 
+    //Skapa en SQL fråga för att hämta användaren från databasen
+  	$query = "SELECT * FROM users WHERE email='$email' AND pass='$password'"; 
+    //Skicka SQL frågan till databasen och spara resultatet i $results
+  	$results = mysqli_query($db, $query); 
+    //kontrollera om det finns en användare med den angivna e-postadressen och lösenordet
+  	if (mysqli_num_rows($results) == 1) { 
+      //Spara e-postadressen i sessionsvariabeln $_SESSION
+  	  $_SESSION['email'] = $email; 
+      //Spara ett meddelande om att inloggningen lyckades i sessionsvariabeln $_SESSION
+  	  $_SESSION['success'] = "You are now logged in"; 
+      //Omdirigera användaren till en annan sida
+  	  header('location: random.php'); 
   	}else {
-  		array_push($errors, "Wrong email/password combination");
+      //Lägg till ett felmeddelande till $errors-arrayen om e-postadressen eller lösenordet är felaktigt
+  		array_push($errors, "Wrong email/password combination"); 
+      //Skriv ut wrong om inloggningen misslyckades
       echo "wrong";
   	}
   }
