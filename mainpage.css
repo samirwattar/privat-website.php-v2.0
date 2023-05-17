@@ -7,15 +7,17 @@
 body{
     align-items: center;
     height: 100vh;
-    background-color: #916dd5;
+    background-color: #70798c;
+
 }
 header{
     width: 100%;
     left: 0%;
     top: 0%;
     padding: 30px 100px;
-    background-color: #3f3649;
+    background-color: #70798c;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     z-index: 99;
