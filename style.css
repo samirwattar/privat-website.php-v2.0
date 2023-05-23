@@ -28,6 +28,7 @@ header{
 
 .logo{
     font-size: 2em;
+    letter-spacing: 2rem;
     color: white;
     user-select: none;
 }

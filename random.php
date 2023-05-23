@@ -48,6 +48,8 @@
 
         <div class="main-account"></div>
     </header>
+    <div class="sec1"></div>
+    <div class="sec2"></div>
 
 
 </body>

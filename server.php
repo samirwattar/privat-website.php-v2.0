@@ -9,7 +9,7 @@ $errors = array();
 //anslut till databasen
 $db = mysqli_connect('localhost', 'root', '', 'clients');
 
-//registera användare
+  //registera användare
 if (isset($_POST['submit'])) {
   //hämta alla inmatade värden från formuläret
   $username = mysqli_real_escape_string($db, $_POST['username']);
@@ -36,11 +36,13 @@ if (isset($_POST['submit'])) {
     }
   }
 
-   //registrera användaren om det inte finns några fel i formuläret
+    //registrera användaren om det inte finns några fel i formuläret
   if (count($errors) == 0) {
     //använd förberedda uttalanden för att förhindra SQL-injektionsattacker
     $stmt = $db->prepare("INSERT INTO users (username, email, pass) VALUES (?, ?, ?)");
+    //Binder värdena till platsmarkörerna i den förberedda sql förfrågan och "sss" anger att alla tre parametrarna är strängar.
     $stmt->bind_param("sss", $username, $email, $password);
+    //Utför den förberedda förfrågan
     $stmt->execute();
 
     header('location: index.php');
