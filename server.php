@@ -43,7 +43,6 @@ if (isset($_POST['submit'])) {
     $stmt->bind_param("sss", $username, $email, $password);
     $stmt->execute();
 
-    $_SESSION['username'] = $username;
     header('location: index.php');
   }
 }
@@ -85,7 +84,7 @@ if (isset($_POST['login'])) {
   	  header('location: random.php'); 
   	}else {
       //Lägg till ett felmeddelande till $errors-arrayen om e-postadressen eller lösenordet är felaktigt
-  		array_push($errors, "Wrong email/password combination"); 
+  		array_push($errors, "Wrong email or password"); 
       //Skriv ut wrong om inloggningen misslyckades
       echo "wrong";
   	}
